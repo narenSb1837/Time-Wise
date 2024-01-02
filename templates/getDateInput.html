@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+
+
+<h1 style="color:#ad8ee9; text-align: center;"> Model used for Forcasting {{ ModelName }} </h1>
+<h1 style="color:#ad8ee9; text-align: center;"> MAPE : {{ MAPE }} </h1>
+<br>
+<br>
+<h3 style="color:#ad8ee9;"> Time Series Chart</h3>
+<div id="timeSeriesChart"></div>
+<br>
+
+<h3 style="color:#ad8ee9;"> Model and Forcasting Chart</h3>
+<div id="modelGraph"></div>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript">
+        var graphs1 = {{ figJSON | safe}};
+        Plotly.plot("timeSeriesChart", graphs1,{});
+    </script>
+    <script type="text/javascript">
+        var graphs2 = {{ graphJSON | safe}};
+        Plotly.plot("modelGraph", graphs2,{});
+    </script>
+
+{% endblock %}

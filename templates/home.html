@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+
+<div style="padding: 30px;">
+    <h1 style="font-size: 60px;" class="textFont">DATA ALCHEMY</h1>
+    <h3 style="font-family: Helvetica,sans-serif; color: #ad8ee9;" class="textFont">Transforming Raw Data into Golden Insights</h3>
+</div>
+<div id="dropzone">
+    <!-- <p style="font-size: 40px; color:#ad8ee9; margin-top: 40px;">Drag and drop files here</p> -->
+    <!-- <form id="upload-form">
+        <label for="file-input">Upload file:</label>
+        <input type="file" id="file-input" name="file" />
+        <button type="submit">Submit</button>
+    </form> -->
+    <form style="font-size: 30px; color:#ad8ee9; margin-top: 40px;" action="/uploadFile" method="post" enctype="multipart/form-data">
+        <input style="border-radius: 10px;color: #ad8ee9; padding-left: 110px;" type="file" name="input_file">
+        <br>
+        <br>
+        <input style="color: white; border: #2e6da4; border-radius: 10px;
+ 
+        line-height: 1.5;
+         
+        text-decoration:none; background-color: #2e6da4;" type="submit">
+    </form>
+</div>
+<div>
+    <h1 style="font-size: 70px; margin-left: 77%; padding-top: 40px;" class="textFont">
+        DataGenie
+    </h1>
+</div>
+
+
+
+<script>
+    var dropzone = document.getElementById('dropzone');
+
+    dropzone.addEventListener('dragover', function(e) {
+        e.preventDefault();
+        dropzone.style.backgroundColor = 'lightgray';
+    });
+
+    dropzone.addEventListener('dragleave', function(e) {
+        e.preventDefault();
+        dropzone.style.backgroundColor = '';
+    });
+
+    dropzone.addEventListener('drop', function(e) {
+        e.preventDefault();
+        var files = e.dataTransfer.files;
+        var formData = new FormData();
+        formData.append('file', files[0]);
+
+        fetch('/uploadfile/', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            // handle the response from the server here
+        })
+        .catch(error => {
+            console.error(error);
+            // handle any errors that occur here
+        });
+    });
+
+    // form.addEventListener('submit', function(e) {
+    //     e.preventDefault();
+    //     var formData = new FormData(form);
+    
+    //     fetch('/uploadfile/', {
+    //         method: 'POST',
+    //         body: formData
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         console.log(data);
+    //         // handle the response from the server here
+    //     })
+    //     .catch(error => {
+    //         console.error(error);
+    //         // handle any errors that occur here
+    //     });
+    // });
+</script>
+
+
+
+{% endblock %}
