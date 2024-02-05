@@ -11,17 +11,10 @@ import plotly.graph_objs as go
 import plotly.io as pio
 import plotly
 
-from fastapi import FastAPI, File, UploadFile, Request
-from fastapi.responses import HTMLResponse
-from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
-from fastapi.responses import RedirectResponse
-
 from tensorflow.keras.models import model_from_json
 
 from models import *
 
-app = FastAPI()
 
 templates = Jinja2Templates(directory="templates")
 
